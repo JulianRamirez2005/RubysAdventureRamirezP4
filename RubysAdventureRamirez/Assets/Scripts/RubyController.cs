@@ -8,7 +8,10 @@ public class RubyController : MonoBehaviour
     public int health { get { return currentHealth; } }
     public int currentHealth;
 
-  
+    public float timeInvincible = 2.0f;
+
+  bool isInvincible;
+    float invincibleTimer;
 
     Rigidbody2D rigidbody2d;
     float horizontal;
@@ -45,20 +48,18 @@ public class RubyController : MonoBehaviour
         //Set the new position
         rigidbody2d.MovePosition(position);
     }
-    public void ChangeHealth(int amount)
+   public void ChangeHealth(int amount)
     {
         if (amount < 0)
         {
             if (isInvincible)
                 return;
-
+            
             isInvincible = true;
             invincibleTimer = timeInvincible;
         }
-
+        
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log(currentHealth + "/" + maxHealth);
     }
-
-    
 }
